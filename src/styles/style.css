@@ -1,0 +1,88 @@
+body {
+    margin: 0;
+}
+* {
+    box-sizing: border-box;
+}
+.header {
+    background-color: #fff;
+}
+.header-wrapper {
+    max-width: 1127px;
+    margin: 0 auto;
+}
+.header-wrapper .items {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-wrapper .items .logo img {
+    width: 100px;
+    height: 90px;
+    padding: 10px;
+    margin-right: 140px;
+}
+.header-wrapper .items .coins {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.header-wrapper .items .coins h4 {
+    padding: 20px;
+    margin: 0;
+}
+
+.header-wrapper .items .currency {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+.header-wrapper .items .currency button {
+    /* border: none;
+    background-color: transparent;
+    position: relative; */
+    background-color: transparent;
+    width: 20px;
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    gap: 10px;
+    direction: rtl;
+    transition: all 0.5s;
+    border: none;
+    padding: 5px;
+    align-items: center;
+}
+.header-wrapper .items .currency button:focus-within  {
+    width: 200px;
+    border: 1px solid #000;
+}
+.header-wrapper .items .currency button i {
+     font-size: 15px;
+     cursor: text;
+   
+}
+.header-wrapper .items .currency button input {
+    width: 100%;
+    direction: ltr !important;
+}
+.header-wrapper .items .currency button input , .header-wrapper .items .currency button input:focus-visible {
+   /* border: none;
+   width: 0;
+   padding: 5px 2.67142857em 5px 5px;
+   max-width: 100%;
+   transition: width 0.3s ease 0s, adding 0.3s ease 0s !important;
+   opacity: 0;
+   z-index: 2;
+   position: relative; */
+   border: none;
+   outline: none;
+}
+
+/* .header-wrapper .items .currency button input:focus {
+    width: 200px;
+    opacity: 1;
+   
+} */
