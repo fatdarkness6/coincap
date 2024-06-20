@@ -37,34 +37,40 @@ export default function HomePage() {
         </div>
         <div className='homePage-part3'>
         <div className='header-wrapper'>
-          <div className='homePage-container'>
-            <div className='part1'>
-              <ul>
-                <li className='section1'>
-                <span>
-                <h6>Rank</h6>
-                </span>
+          <table className='homePage-container'>
+          <thead>
+            <tr className='part1'>
+              
+                {/* <li className='section1'> */}
+               
+               <th><h6>Rank</h6></th> 
+                
                   
-                  <h6>Name</h6>
-                </li>
-                <li className='section2'>
-                  <h6>Price</h6>
-                  <h6>Market Cap</h6>
-                  <h6>VWAP(24Hr)</h6>
-                  <h6>Supply</h6>
-                  <h6>Volume(24Hr)</h6>
-                  <h6>Change(24Hr)</h6>
-                </li>
-              </ul>
-            </div>
-            <div className='part2'>
+                <th className='left align'><h6>Name</h6></th>  
+                {/* </li> */}
+                {/* <li className='section2'> */}
+                 <th className='right align'> <h6>Price</h6></th>
+                  <th className='right align'><h6>Market Cap</h6></th>
+                 <th className='right align'><h6>VWAP(24Hr)</h6></th> 
+                  <th className='right align'><h6>Supply</h6></th>
+                  <th className='right align'><h6>Volume(24Hr)</h6></th>
+                 <th className='right align'><h6>Change(24Hr)</h6></th> 
+                
+                {/* </li> */}
+              
+            </tr>
+            </thead>
+            <tbody>
             {res.map(e => {
             console.log(e)
             return <RenderCoins name = {e.name} id = {e.rank} priceUsd = {e.priceUsd} marketCapUsd = {e.marketCapUsd} vwap24Hr = {e.vwap24Hr} supply = {e.supply} volumeUsd24Hr = {e.volumeUsd24Hr} changePercent24Hr = {e.changePercent24Hr} symbol= {e.symbol}/>
           })}
+            </tbody>
+            <div className='part2'>
+            
             </div>
             
-          </div>
+          </table>
         </div>
         
           
