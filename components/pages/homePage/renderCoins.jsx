@@ -1,7 +1,8 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function RenderCoins(props) {
-    let percent = useRef()
+    let [tr , setTrue] = useState(false)
+
     function calculate(x) {
 
         if (x >= 0.01) {
@@ -37,11 +38,17 @@ export default function RenderCoins(props) {
             return parseFloat(y).toFixed(2)
         }
         else if (y < 0 ) {
-            percent.current.className = "red"
+            useEffect(() => {
 
+                  setTrue(true)
+                  
+            } , [])
             return parseFloat(y).toFixed(2)
         }
     }
+    useEffect(() => {
+
+    } , [])
 
     return (
         <tr>
@@ -61,7 +68,7 @@ export default function RenderCoins(props) {
                 <td className='right align'><h5>{calculate(props.vwap24Hr)}</h5></td>
                 <td className='right align'><h5>{calculateBigNumber(props.supply)}</h5></td>
                 <td className='right align'><h5>{calculateBigNumber(props.volumeUsd24Hr)}</h5></td>
-                <td ref={percent} className='right align'><h5>{calculateBigNumber(props.changePercent24Hr)}%</h5></td>
+                <td id={tr ? "red" : "green"} className='right align'><h5>{calculateBigNumber(props.changePercent24Hr)}%</h5></td>
             {/* </div> */}
 
             {/* </div> */}

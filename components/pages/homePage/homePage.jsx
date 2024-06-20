@@ -7,25 +7,35 @@ export default function HomePage() {
   let [plus, updatePlus] = useState(20);
   let [state, updateState] = useState(false);
   let [res, updateRes] = useState([]);
+  let [upd , setUpd] = useState(1)
+
+  
   useEffect(() => {
+    
 
-    homePageApi(plus)
-      .then((e) => {
-        return e.json();
-      })
-      .then((e) => {
-        updateRes(e.data);
-      }).catch(() => {
-        return <h1>error</h1>
-      })
-  }, [plus]);
+      homePageApi(plus)
+        .then((e) => {
+          return e.json();
+        })
+        .then((e) => {
+          updateRes(e.data);
+        }).catch(() => {
+          return <h1>error</h1>
+        })
+   
+  }, [plus , upd]);
+useEffect(() => {
 
+  setInterval(() => {
+    setUpd(upd++)
+  },10000)
+} , [])
   if (state) {
     setTimeout(() => {
       updateState(false);
     }, 1000);
   }
-
+  console.log(upd)
   return (
     <>
       <div className='father'>
