@@ -28,7 +28,7 @@ useEffect(() => {
 
   setInterval(() => {
     setUpd(upd++)
-  },10000)
+  },40000)
 } , [])
   if (state) {
     setTimeout(() => {
@@ -76,9 +76,6 @@ useEffect(() => {
             return <RenderCoins name = {e.name} id = {e.rank} priceUsd = {e.priceUsd} marketCapUsd = {e.marketCapUsd} vwap24Hr = {e.vwap24Hr} supply = {e.supply} volumeUsd24Hr = {e.volumeUsd24Hr} changePercent24Hr = {e.changePercent24Hr} symbol= {e.symbol}/>
           })}
             </tbody>
-            <div className='part2'>
-            
-            </div>
             
           </table>
         </div>

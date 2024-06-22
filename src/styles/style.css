@@ -237,14 +237,24 @@ ul , li {
  }
  table thead tr th {
    padding: .92857143em .78571429em;
+   
  }
  table thead tr th h6 {
    margin: 0;
    font-size: 15px;
+   font-weight: 200;
+   font-size: 13px;
+ }
+ table thead tr th:nth-child(1) h6 {
+  font-weight: 400 !important;
  }
  table tbody tr {
    box-shadow: 0px 0px 4px 0.5px #00000038;
  }
+ table tbody tr td h5 {
+  font-weight: 400;
+ }
+ 
  table tr td {
    padding: .78571429em;
  }
@@ -259,6 +269,7 @@ ul , li {
  }
  .mix h5:nth-child(2) {
    margin-bottom: 0;
+   font-weight: 200;
  }
  .father .homePage-part3 {
    margin-top: -120px;
@@ -270,3 +281,6 @@ ul , li {
  #green {
   color: green;
  }
+
+
+

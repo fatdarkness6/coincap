@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import LineChart from "../../chart/line";
+
 
 export default function RenderCoins(props) {
     let [tr , setTrue] = useState(false)
@@ -34,23 +36,19 @@ export default function RenderCoins(props) {
             return `${(y / 1000).toFixed(2)}k`
         }else if (y>=1000000000000) {
             return  `${(y / 1000000000000).toFixed(2)}t`
-        }else if (y >= 0.01) {
+        }else if (y >= 0.01 || y < 0) {
             return parseFloat(y).toFixed(2)
         }
-        else if (y < 0 ) {
-            useEffect(() => {
-
-                  setTrue(true)
-                  
-            } , [])
-            return parseFloat(y).toFixed(2)
-        }
+        
     }
     useEffect(() => {
-
+        if (props.changePercent24Hr < 0) {
+            setTrue(true)
+        }
     } , [])
 
     return (
+        <>
         <tr>
             {/* <div className="border"> */}
 
@@ -73,6 +71,13 @@ export default function RenderCoins(props) {
 
             {/* </div> */}
         </tr>
+        {/* <tr>
+            <td></td>
+            <td>
+                
+            </td>
+        </tr> */}
+        </>
         
     )
 }
