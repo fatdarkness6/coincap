@@ -251,8 +251,12 @@ ul , li {
  table tbody tr {
    box-shadow: 0px 0px 4px 0.5px #00000038;
  }
+ table tbody tr .backgroundHover:hover {
+    background-color: #646464;
+ }
  table tbody tr td h5 {
   font-weight: 400;
+  margin-bottom: 0;
  }
  
  table tr td {
@@ -267,9 +271,12 @@ ul , li {
  .left.align {
    text-align: left;
  }
- .mix h5:nth-child(2) {
-   margin-bottom: 0;
-   font-weight: 200;
+ .mix h5 {
+    margin: 0;
+   cursor: pointer;
+ }
+ .mix:hover {
+    text-decoration: underline;
  }
  .father .homePage-part3 {
    margin-top: -120px;
@@ -281,6 +288,91 @@ ul , li {
  #green {
   color: green;
  }
+ td.td-flex {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+ }
+ td.td-flex img {
+    width: 35px;
+    height: 35px;
+ }
+ .homePage-part4 {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+ }
+ .load-button {
+    background: linear-gradient(to right, rgb(63, 81, 181), rgb(98, 183, 252));
+    padding: 15px 20px;
+    border: none;
+    border-radius: 40px;
+    color: #fff;
+    transition: all 0.3s;
+ }
+ .load-button:hover {
+    transform: translateY(-3px);
+ }
 
+.none {
+   display: none;
+}
+.info-slice1 {
+   display: flex;
+   align-items: center;
+   gap: 40px;
+}
 
+.info-slice1 .info-img {
+   width: 80px;
+   height: 80px;
 
+}
+.info-slice1 .info-img img {
+   width: 100%;
+   height: 100%;
+}
+.info-mix {
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+}
+.info-mix-slice1 {
+   display: flex;
+   align-items: center;
+}
+.info-mix-slice1 h5 {
+   font-size: 20px;
+   margin: 0;
+   font-weight: 500;
+}
+.info-part1 {
+   display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.flex-align-gap-row {
+   display: flex;
+   align-items: center;
+   gap: 20px;
+}
+.info-high-low , .info-avrage-change {
+   display: flex;
+   align-items: start;
+   flex-direction: column;
+}
+ /* {
+   display: flex;
+   align-items: center;
+   gap: 20px;
+} */
+.info-slice2 {
+   display: flex;
+   align-items: center;
+   gap: 60px;
+}
+.info-slice2 h3 {
+   font-size: 15px;
+   font-weight: 300;
+   color: rgb(142, 142, 142);
+}
