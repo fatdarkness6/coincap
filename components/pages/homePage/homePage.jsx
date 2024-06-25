@@ -1,21 +1,30 @@
 import { useEffect, useState } from 'react';
-import { homePageApi } from '../../../api/homePageApi';
+import { homePageApi, homePageApiFullInfo } from '../../../api/homePageApi';
 import Header from '../../header/header';
 import RenderCoins from './renderCoins';
 import { iconApi } from '../../../api/iconsApi';
 import axios from 'axios';
+import { exchangeApi } from '../../../api/exchangeApi';
+import { marketApi } from '../../../api/marketApi';
 
 export default function HomePage() {
   let [plus, updatePlus] = useState(20);
   let [state, updateState] = useState(false);
   let [res, updateRes] = useState([]);
   let [upd, setUpd] = useState(1);
-  let [itsTrue, setItsTrue] = useState('');
-  let [itsFalse, setItsFalse] = useState(false);
+  let [fullRes, setFullRes] = useState([]);
+  let [exchange, setExchange] = useState([]);
+  //.........................................................................
+  let arry = [];
+  let priceNumber = 0;
+  let final = 0;
+  let EXCHANGEVOLarry = [];
+  let EXCHANGEVOLnumber = 0;
+  let EXCHANGEVOLfinal = 0;
+  //.........................................................................
   useEffect(() => {
     homePageApi(plus)
       .then((e) => {
-        setItsTrue(e.status);
         return e.json();
       })
       .then((e) => {
@@ -24,8 +33,38 @@ export default function HomePage() {
       .catch(() => {
         return <h1>error</h1>;
       });
-  }, [plus, upd]);
 
+    homePageApiFullInfo()
+      .then((e) => {
+        return e.json();
+      })
+      .then((e) => {
+        setFullRes(e.data);
+      })
+      .catch(() => {
+        return <h1>error</h1>;
+      });
+    exchangeApi()
+      .then((e) => {
+        return e.json();
+      })
+      .then((e) => {
+        setExchange(e.data);
+      })
+      .catch(() => {
+        return <h1>error</h1>;
+      });
+    marketApi()
+      .then((e) => {
+        return e.json();
+      })
+      .then((e) => {
+        setMarket(e.data);
+      })
+      .catch(() => {
+        return <h1>error</h1>;
+      });
+  }, [plus, upd]);
   useEffect(() => {
     setInterval(() => {
       setUpd(upd++);
@@ -43,25 +82,61 @@ export default function HomePage() {
         <div className='homePage-part1'>
           <Header />
         </div>
-        <div className='homePage-part2'></div>
+        <div className='homePage-part2'>
+          <div className='homePage-part2-wrapper'>
+            <div className='flex-align-center-justify padding-top'>
+              <div className='homePage-part2-MARKETCAP flex-center-column'>
+                {fullRes.map((e) => {
+                  let a = e.marketCapUsd;
+                  arry.push(a);
+                })}
+                {arry.forEach((e) => {
+                  let a = (priceNumber += +e);
+                  let b = a / 1000000000000;
+                  let c = b.toFixed(2);
+
+                  return (final = c);
+                })}
+                <h3>MARKETCAP</h3>
+                <h3>{final}T</h3>
+              </div>
+              <div className='homePage-part2-EXCHANGEVOL flex-center-column'>
+                {fullRes.map((e) => {
+                  let a = e.volumeUsd24Hr;
+                  EXCHANGEVOLarry.push(a);
+                })}
+                {EXCHANGEVOLarry.forEach((e) => {
+                  let a = (EXCHANGEVOLnumber += +e);
+                  let b = a / 1000000000;
+                  let c = b.toFixed(2);
+                  return (EXCHANGEVOLfinal = c);
+                })}
+                <h3>EXCHANGEVOL</h3>
+                <h3>{EXCHANGEVOLfinal}B</h3>
+              </div>
+              <div className='homePage-part2-ASSETS flex-center-column'>
+                <h3>ASSETS</h3>
+                <h3>{fullRes.length}</h3>
+              </div>
+              <div className='homePage-part2-EXCHANGES flex-center-column'>
+                <h3>EXCHANGES</h3>
+                <h3>{exchange.length}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
         <div className='homePage-part3'>
           <div className='header-wrapper'>
             <table className='homePage-container'>
               <thead>
                 <tr className='part1'>
-                  {/* <li className='section1'> */}
-
                   <th>
                     <h6>Rank</h6>
                   </th>
-
                   <th className='left align'>
                     <h6>Name</h6>
                   </th>
-                  {/* </li> */}
-                  {/* <li className='section2'> */}
                   <th className='right align'>
-                    {' '}
                     <h6>Price</h6>
                   </th>
                   <th className='right align'>
@@ -79,8 +154,6 @@ export default function HomePage() {
                   <th className='right align'>
                     <h6>Change(24Hr)</h6>
                   </th>
-
-                  {/* </li> */}
                 </tr>
               </thead>
               <tbody>

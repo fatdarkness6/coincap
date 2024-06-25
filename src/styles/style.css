@@ -136,6 +136,9 @@ ul , li {
     padding: 5px;
     align-items: center;
 }
+.currency-part1 {
+   position: relative;
+}
 .header-wrapper .items .currency button:focus-within  {
     width: 200px;
     border: 1px solid #000;
@@ -148,25 +151,14 @@ ul , li {
 .header-wrapper .items .currency button input {
     width: 100%;
     direction: ltr !important;
+    background-color: transparent !important;
 }
 .header-wrapper .items .currency button input , .header-wrapper .items .currency button input:focus-visible {
-   /* border: none;
-   width: 0;
-   padding: 5px 2.67142857em 5px 5px;
-   max-width: 100%;
-   transition: width 0.3s ease 0s, adding 0.3s ease 0s !important;
-   opacity: 0;
-   z-index: 2;
-   position: relative; */
    border: none;
    outline: none;
 }
 
-/* .header-wrapper .items .currency button input:focus {
-    width: 200px;
-    opacity: 1;
-   
-} */
+
  .homePage-part2 {
     max-width: 100%;
     height: 200px;
@@ -250,9 +242,17 @@ ul , li {
  }
  table tbody tr {
    box-shadow: 0px 0px 4px 0.5px #00000038;
+   transition: all 0.5s;
+   
  }
- table tbody tr .backgroundHover:hover {
-    background-color: #646464;
+ table tbody tr#zoom-in {
+   cursor: zoom-in;
+ }
+ table tbody tr#zoom-out {
+   cursor: zoom-out;
+ }
+ table tbody tr.hover:hover{
+   background-color: rgba(0,0,0,.05)!important;
  }
  table tbody tr td h5 {
   font-weight: 400;
@@ -309,6 +309,7 @@ ul , li {
     border-radius: 40px;
     color: #fff;
     transition: all 0.3s;
+    cursor: cell;
  }
  .load-button:hover {
     transform: translateY(-3px);
@@ -356,6 +357,13 @@ ul , li {
    align-items: center;
    gap: 20px;
 }
+.flex-align-center {
+   display: flex;
+   align-items: center;
+}
+.currency-part2-absolute .flex-align-center h5 {
+   margin-top: 0;
+}
 .info-high-low , .info-avrage-change {
    display: flex;
    align-items: start;
@@ -375,4 +383,133 @@ ul , li {
    font-size: 15px;
    font-weight: 300;
    color: rgb(142, 142, 142);
+}
+.black-background {
+   background-color: rgba(0, 0, 0, .6);
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   color: #fff;
+}
+.portal-items {
+   width: 100%;
+}
+.portal-wrapper {
+   max-width: 400px;
+   margin: 0 auto;
+   height: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+}
+.portal-item1 {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   
+}
+.portal-item1-part1 {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+}
+.portal-item1-part1 h4 {
+   margin: 0;
+}
+.portal-item1-part1 i {
+   font-size: 25px;
+}
+.portal-item1-part2 {
+   cursor: pointer;
+   font-size: 20px;
+}
+.portal-item2 {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+.portal-item3 input {
+   width: 100%;
+   background-color: transparent;
+   border-top: none;
+   border-left: none;
+   border-right: none;
+   border-bottom: 1px solid #000;
+   color: #fff;
+   font-size: 17px;
+
+}
+.currency-part2-absolute {
+   width: 200px;
+   height: 300px;
+   overflow: auto;
+   position: absolute;
+   top: 35px;
+   left: 0;
+   background-color: #fff;
+   padding: 10px;
+   box-shadow: 0 0 10px 0px #00000069;
+   border-radius: 10px;
+}
+.currency-part2 {
+   cursor: pointer;
+}
+.currency-part2-absolute::-webkit-scrollbar {
+   background: #fff;
+   width: 7px;
+}
+.currency-part2-absolute::-webkit-scrollbar-thumb {
+   background: #00000094;
+   border-radius: 10px;
+ }
+.currency-part2-absolute h3 {
+   border-bottom: 1px solid #000;
+}
+.currency-part2-absolute h5 {
+   color: #504d4d;
+   font-weight: 300;
+   font-size: 14px;
+}
+.portal-item3 input::placeholder {
+   color: #fff;
+}
+.portal-item3 input:focus {
+   outline: none;
+   border-top: none;
+   border-left: none;
+   border-right: none;
+   background-color: transparent;
+}
+
+#none {
+   display: none;
+}
+
+.homePage-part2-wrapper {
+   max-width: 700px;
+   margin: 0 auto;
+}
+.flex-align-center-justify {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+.homePage-part2 h3 {
+   margin: 0;
+   color: #fff;
+}
+.homePage-part2 h3:nth-child(1) {
+   font-size: 15px;
+}
+.padding-top {
+   padding-top: 20px;
+}
+.flex-center-column {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
 }

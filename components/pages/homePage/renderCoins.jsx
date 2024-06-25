@@ -23,7 +23,6 @@ ChartJs.register(
 );
 
 export default function RenderCoins(props) {
-  const start = moment().add(-10, 'm');
   let [tr, setTrue] = useState(false);
   let [response, setResponse] = useState([]);
   let [click, setClick] = useState(false);
@@ -47,12 +46,10 @@ export default function RenderCoins(props) {
   useEffect(() => {
     setInterval(() => {
       setUpd(upd++);
-    }, 40000);
+    }, 40500);
   } , [])
-  console.log(response);
   let data = {
-  labels: response.reverse().splice(0 , 250).reverse().map((e) => {
-    console.log(e);
+  labels: response.reverse().splice(0 , 150).reverse().map((e) => {
         return moment(e.date).format(" (DD) ( HH:mm)");
       }),
   
@@ -159,7 +156,7 @@ export default function RenderCoins(props) {
   }
   return (
     <>
-      <tr
+      <tr className='hover' id={click ? "zoom-out" : "zoom-in"}
         onClick={() => {
           setClick(!click);
         }}>
@@ -167,7 +164,7 @@ export default function RenderCoins(props) {
           <h5>{props.id}</h5>
         </td>
 
-        <td className='td-flex'>
+        <td colSpan={2} className='td-flex'>
           <img
             src={`https://assets.coincap.io/assets/icons/${lowerCase}@2x.png`}
           />
