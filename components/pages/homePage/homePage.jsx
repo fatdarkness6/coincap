@@ -2,10 +2,9 @@ import { useEffect, useState } from 'react';
 import { homePageApi, homePageApiFullInfo } from '../../../api/homePageApi';
 import Header from '../../header/header';
 import RenderCoins from './renderCoins';
-import { iconApi } from '../../../api/iconsApi';
-import axios from 'axios';
 import { exchangeApi } from '../../../api/exchangeApi';
 import { marketApi } from '../../../api/marketApi';
+import Body from '../../body/body';
 
 export default function HomePage() {
   let [plus, updatePlus] = useState(20);
@@ -15,13 +14,8 @@ export default function HomePage() {
   let [fullRes, setFullRes] = useState([]);
   let [exchange, setExchange] = useState([]);
   //.........................................................................
-  let arry = [];
-  let priceNumber = 0;
-  let final = 0;
-  let EXCHANGEVOLarry = [];
-  let EXCHANGEVOLnumber = 0;
-  let EXCHANGEVOLfinal = 0;
-  //.........................................................................
+ 
+ 
   useEffect(() => {
     homePageApi(plus)
       .then((e) => {
@@ -33,7 +27,6 @@ export default function HomePage() {
       .catch(() => {
         return <h1>error</h1>;
       });
-
     homePageApiFullInfo()
       .then((e) => {
         return e.json();
@@ -82,49 +75,7 @@ export default function HomePage() {
         <div className='homePage-part1'>
           <Header />
         </div>
-        <div className='homePage-part2'>
-          <div className='homePage-part2-wrapper'>
-            <div className='flex-align-center-justify padding-top'>
-              <div className='homePage-part2-MARKETCAP flex-center-column'>
-                {fullRes.map((e) => {
-                  let a = e.marketCapUsd;
-                  arry.push(a);
-                })}
-                {arry.forEach((e) => {
-                  let a = (priceNumber += +e);
-                  let b = a / 1000000000000;
-                  let c = b.toFixed(2);
-
-                  return (final = c);
-                })}
-                <h3>MARKETCAP</h3>
-                <h3>{final}T</h3>
-              </div>
-              <div className='homePage-part2-EXCHANGEVOL flex-center-column'>
-                {fullRes.map((e) => {
-                  let a = e.volumeUsd24Hr;
-                  EXCHANGEVOLarry.push(a);
-                })}
-                {EXCHANGEVOLarry.forEach((e) => {
-                  let a = (EXCHANGEVOLnumber += +e);
-                  let b = a / 1000000000;
-                  let c = b.toFixed(2);
-                  return (EXCHANGEVOLfinal = c);
-                })}
-                <h3>EXCHANGEVOL</h3>
-                <h3>{EXCHANGEVOLfinal}B</h3>
-              </div>
-              <div className='homePage-part2-ASSETS flex-center-column'>
-                <h3>ASSETS</h3>
-                <h3>{fullRes.length}</h3>
-              </div>
-              <div className='homePage-part2-EXCHANGES flex-center-column'>
-                <h3>EXCHANGES</h3>
-                <h3>{exchange.length}</h3>
-              </div>
-            </div>
-          </div>
-        </div>
+        <Body exchange = {exchange} fullRes = {fullRes} />
         <div className='homePage-part3'>
           <div className='header-wrapper'>
             <table className='homePage-container'>
@@ -158,6 +109,8 @@ export default function HomePage() {
               </thead>
               <tbody>
                 {res.map((e) => {
+                  console.log(e);
+                  
                   return (
                     <RenderCoins
                       name={e.name}

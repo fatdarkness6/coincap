@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import React, { Component } from 'react';
 import { Line } from 'react-chartjs-2';
 import { candleApi } from '../../../api//candle';
-import Moment from 'react-moment';
+
 import moment from 'moment';
+import { calculateBigNumber } from '../../../jsFunctions/calculateFunction';
 import {
   Chart as ChartJs,
   LineElement,
@@ -13,6 +14,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import { Link } from 'react-router-dom';
 ChartJs.register(
   LineElement,
   CategoryScale,
@@ -26,33 +28,36 @@ export default function RenderCoins(props) {
   let [tr, setTrue] = useState(false);
   let [response, setResponse] = useState([]);
   let [click, setClick] = useState(false);
-  let [upd  , setUpd] = useState(1);
+  let [upd, setUpd] = useState(1);
   //....................................chart...............................
 
   useEffect(() => {
     let name = props.nameOfTheCoins;
     if (click) {
-
-        candleApi(name)
-          .then((e) => {
-            return e.json();
-          })
-          .then((e) => {
-            setResponse(e.data);
-          });
+      candleApi(name)
+        .then((e) => {
+          return e.json();
+        })
+        .then((e) => {
+          setResponse(e.data);
+        });
     }
-  }, [click , upd]);
+  }, [click, upd]);
 
   useEffect(() => {
     setInterval(() => {
       setUpd(upd++);
     }, 40500);
-  } , [])
+  }, []);
   let data = {
-  labels: response.reverse().splice(0 , 150).reverse().map((e) => {
-        return moment(e.date).format(" (DD) ( HH:mm)");
+    labels: response
+      .reverse()
+      .splice(0, 150)
+      .reverse()
+      .map((e) => {
+        return moment(e.date).format(' (DD) ( HH:mm)');
       }),
-  
+
     datasets: [
       {
         data: response.map((e) => {
@@ -80,42 +85,12 @@ export default function RenderCoins(props) {
   //........................................................................
 
   let lowerCase = props.symbol.toLowerCase();
-  useEffect(() => {}, []);
 
   function calculate(x) {
     if (x >= 0.01) {
       return '$' + parseFloat(x).toFixed(2);
     } else if (x < 0.01) {
       return '$' + parseFloat(x).toFixed(6);
-    }
-  }
-
-  function calculateBigNumber(y) {
-    if (y <= 1000000000000 && y >= 100000000000) {
-      let transformed = `${(y / 1000000000).toFixed(2)}b`;
-      return transformed;
-    } else if (y <= 100000000000 && y >= 10000000000) {
-      return `${(y / 1000000000).toFixed(2)}b`;
-    } else if (y < 10000000000 && y >= 1000000000) {
-      return `${(y / 1000000000).toFixed(2)}b`;
-    } else if (y < 1000000000 && y >= 100000000) {
-      return `${(y / 1000000).toFixed(2)}m`;
-    } else if (y < 100000000 && y >= 10000000) {
-      return `${(y / 1000000).toFixed(2)}m`;
-    } else if (y < 10000000 && y >= 1000000) {
-      return `${(y / 1000000).toFixed(2)}m`;
-    } else if (y < 10000000 && y >= 100000) {
-      return `${(y / 1000).toFixed(2)}k`;
-    } else if (y < 100000 && y >= 10000) {
-      return `${(y / 1000).toFixed(2)}k`;
-    } else if (y < 10000 && y >= 1000) {
-      return `${(y / 1000).toFixed(2)}k`;
-    } else if (y >= 1000000000000) {
-      return `${(y / 1000000000000).toFixed(2)}t`;
-    } else if (y >= 0.01 || y < 0) {
-      return parseFloat(y).toFixed(2);
-    } else if (y < 0.01) {
-      return parseFloat(y).toFixed(6);
     }
   }
 
@@ -156,7 +131,9 @@ export default function RenderCoins(props) {
   }
   return (
     <>
-      <tr className='hover' id={click ? "zoom-out" : "zoom-in"}
+      <tr
+        className='hover'
+        id={click ? 'zoom-out' : 'zoom-in'}
         onClick={() => {
           setClick(!click);
         }}>
@@ -238,11 +215,14 @@ export default function RenderCoins(props) {
           </div>
           <div className='chart-part2'>
             <Line data={data} options={options}></Line>
+            <Link to={`/assets/${props.nameOfTheCoins}`}>
+              <div className='chart-part2-mix'>
+                <button className='seeMoreButton'>More Details</button>
+              </div>
+            </Link>
           </div>
         </td>
       </tr>
     </>
   );
 }
-
-
