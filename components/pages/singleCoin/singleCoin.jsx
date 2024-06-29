@@ -1,4 +1,4 @@
-import { useParams, useSearchParams } from 'react-router-dom';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 import Header from '../../header/header';
 import { useEffect, useRef } from 'react';
 import { coinsApi } from '../../../api/coins';
@@ -7,6 +7,14 @@ import { calculateBigNumber } from '../../../jsFunctions/calculateFunction';
 import { candleApi, candleApiLimit } from '../../../api/candle';
 import { Line } from 'react-chartjs-2';
 import moment from 'moment';
+import BinanceImage from '../../../public/bnb@2x.png';
+import EthImage from '../../../public/eth@2x.png';
+import foxImg from '../../../public/MetaMask_Fox.svg.png';
+import wallet1 from '../../../public/wallet1.png';
+import torus from '../../../public/torus.png';
+import BinanceSmart from '../../../public/Binance-Smart.png';
+import aaa from "../../../public/aaa.png"
+import bbb from "../../../public/bbb.png"
 
 import {
   Chart as ChartJs,
@@ -39,10 +47,11 @@ export default function SingleCoin() {
   let [upd, setUpdate] = useState(1);
   let [search, setSearch] = useSearchParams();
   let [selectCoin, setSelectCoin] = useState('unselect');
-  let [openPortal , setOpenPortal ] = useState(false)
+  let [selectWallet, setSelectWallet] = useState('Binance');
+  let [openPortal, setOpenPortal] = useState(false);
   useEffect(() => {
-    setSearch(`active=${date}&selectCoin=${selectCoin}`);
-  }, [upd]);
+    setSearch(`active=${date}&selectCoin=${selectCoin}&wallet=${selectWallet}`);
+  }, [upd, selectWallet]);
 
   useEffect(() => {
     coinsApi(coinName)
@@ -372,7 +381,7 @@ export default function SingleCoin() {
                 <i class='fa-solid fa-reply'></i>
               </div>
               <div className='coinExchange-part2'>
-              <h4>You Get</h4>
+                <h4>You Get</h4>
                 <div className='coinExchange-part1-slice1'>
                   <input type='number' placeholder='0' />
                   <div className='selectedCoin'>
@@ -381,22 +390,133 @@ export default function SingleCoin() {
                   </div>
                 </div>
               </div>
-                  
-                <button onClick={() => {
-                  setOpenPortal(true)
-                }} className='connectWalletButton'>Connect Wallet</button>
-              
+
+              <button
+                onClick={() => {
+                  setOpenPortal(true);
+                }}
+                className='connectWalletButton'>
+                Connect Wallet
+              </button>
             </div>
           </div>
         </div>
       </div>
-      {openPortal ? createPortal(
-        <div  className='black-background'>
-          
-          
-      </div>,
-      document.body
-      ) : null}
+      {openPortal
+        ? createPortal(
+            <div className='black-background'>
+              <div className='wallet-wrapper'>
+                <div className='wallet-container'>
+                  <div className='wallet-title'>
+                    <div className='close-wallet-button'>
+                      <i
+                        onClick={() => {
+                          setOpenPortal(false);
+                        }}
+                        class='fa-solid fa-xmark'></i>
+                    </div>
+                    <div className='select-network'>
+                      <h3>Select a network</h3>
+                      <div className='select-networkPart flex-align-center-justify '>
+                        <div
+                          onClick={() => {
+                            setSelectWallet('Ethereum');
+                          }}
+                          id={
+                            search.get('wallet') == 'Ethereum'
+                              ? 'blueBorder'
+                              : null
+                          }
+                          className='select-networkPart-Ethereum'>
+                          <img src={EthImage} />
+                          <p>Ethereum</p>
+                        </div>
+                        <div
+                          onClick={() => {
+                            setSelectWallet('Binance');
+                          }}
+                          id={
+                            search.get('wallet') == 'Binance'
+                              ? 'yellowBorder'
+                              : null
+                          }
+                          className='select-networkPart-Binance'>
+                          <img src={BinanceImage} />
+                          <p>Binance</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='select-wallet'>
+                      <div
+                        id={
+                          search.get('wallet') == 'Binance' ? 'block' : 'none'
+                        }
+                        className='select-wallet-Binance'>
+                        <h3>Connect a wallet</h3>
+                        <div className='select-wallet-BinancePart'>
+                            <Link to={'https://metamask.io'}>
+                          <div className='select-wallet-BinancePart-slice1 div-button'>
+                              <h4>Install Metamask</h4>
+                              <img src={foxImg} />
+                          </div>
+                            </Link>
+                          <div className='select-wallet-BinancePart-slice2 div-button'>
+                            <h4>WalletConnect</h4>
+                            <img src={wallet1} />
+                          </div>
+                          <div className='select-wallet-BinancePart-slice3 div-button'>
+                            <h4>Torus</h4>
+                            <img src={torus} />
+                          </div>
+                          <div className='select-wallet-BinancePart-slice4 div-button'>
+                            <h4>Binance Chain Wallet</h4>
+                            <img src={BinanceSmart} />
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        id={
+                          search.get('wallet') == 'Ethereum' ? 'block' : 'none'
+                        }
+                        className='select-wallet-Ethereum'>
+                          <h3>Connect a wallet</h3>
+                        <div className='select-wallet-BinancePart'>
+                            <Link to={'https://metamask.io'}>
+                          <div className='select-wallet-BinancePart-slice1 div-button'>
+                              <h4>Portis By ShapeShift</h4>
+                              <img src={aaa} />
+                          </div>
+                            </Link>
+                          <div className='select-wallet-BinancePart-slice2 div-button'>
+                          <h4>Install Metamask</h4>
+                          <img src={foxImg} />
+                          </div>
+                          <div className='select-wallet-BinancePart-slice3 div-button'>
+                            <h4>Torus</h4>
+                            <img src={torus} />
+                          </div>
+                          <div className='select-wallet-BinancePart-slice4 div-button'>
+                          <h4>WalletConnect</h4>
+                          <img src={wallet1} />
+                          </div>
+                          <div className='select-wallet-BinancePart-slice4 div-button'>
+                            <h4>Coinbase Wallet</h4>
+                            <img src={bbb} />
+                          </div>
+                          <div className='select-wallet-BinancePart-slice4 div-button'>
+                            <h4>Binance Chain Wallet</h4>
+                            <img src={BinanceSmart} />
+                          </div>
+                        </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>,
+            document.body
+          )
+        : null}
     </div>
   );
 }
