@@ -93,10 +93,10 @@ export default function HomePage() {
                   <th className='right align'>
                     <h6>Market Cap</h6>
                   </th>
-                  <th className='right align'>
+                  <th className='right align NoNe1'>
                     <h6>VWAP(24Hr)</h6>
                   </th>
-                  <th className='right align'>
+                  <th className='right align NoNe1'>
                     <h6>Supply</h6>
                   </th>
                   <th className='right align'>

@@ -72,7 +72,11 @@
  }
  
 /* ========================================================= */
-
+::-webkit-scrollbar {
+   width: 10px;
+   background-color: #18c683;
+   border-radius: 10px;
+}
 body {
     margin: 0;
     font-family: Vazirmatn;
@@ -108,11 +112,12 @@ a {
    display: flex;
    align-items: center;
    justify-content: center;
-
 }
 
 .header {
     background-color: #fff;
+    position: sticky;
+    top: 0;
 }
 .darkMode .header {
    background-color: #000000;
@@ -222,7 +227,7 @@ a {
 }
 
  .darkMode .homePage-part2 {
-   background: linear-gradient(to right, rgb(49, 49, 49), rgb(124, 124, 124)) rgb(180, 180, 180) !important;
+   background: linear-gradient(to right, #0a0a0a,#242424 ,  #383838) !important;
  }
 
  .homePage-part3 .header-wrapper .homePage-container {
@@ -753,15 +758,19 @@ div.red {
    background-color: #18c683;
    color: #fff;
 }
-.candlesAndCoins-info-slice2 {
-   background-color: #fff;
-   box-shadow: 0px 0px 10px #00000080;
-   padding: 20px;
-}
+
 .coinExchange-part1 ,.coinExchange-part2 {
    background-color: #f9f9f9;
    padding: 20px;
    border-radius: 20px;
+}
+.darkMode :is(.coinExchange-part1 ,.coinExchange-part2) {
+   background-color: #363636;
+   color: #fff;
+   box-shadow: 0 0 5px 3px #ffffff14;
+}
+.darkMode :is(.coinExchange-part1-slice1 input , .coinExchange-part1-slice2 input ) {
+   color: #fff;
 }
 .coinExchange-part1-slice1 input {
    border: none;
@@ -797,12 +806,25 @@ input[type=number] {
    align-items: center;
    justify-content: space-between;
 }
+.darkMode .candlesAndCoins-info-container {
+   color: #fff;
+}
 .candlesAndCoins-info-slice1 {
    width: 70%;
 }
 .candlesAndCoins-info-slice2 {
    width: 28%;
    border-radius: 20px;
+   background-color: #fff;
+   box-shadow: 0px 0px 10px #00000080;
+   padding: 20px;
+   display: flex;
+   flex-direction: column;
+   gap: 15px;
+   justify-content: start;
+}
+.darkMode .candlesAndCoins-info-slice2 {
+   background-color: #363636;
 }
 .connectWalletButton {
    width: 100%;
@@ -844,6 +866,16 @@ input[type=number] {
    color: #000;
    max-height: 70%;
    overflow: overlay;
+}
+.darkMode .wallet-container {
+   background-color: #252525;
+   color: #fff;
+}
+.darkMode :is(.select-networkPart-Ethereum, .select-networkPart-Binance) {
+   background-color: #363636;
+}
+.darkMode .div-button {
+   background-color: #363636;
 }
 .wallet-container::-webkit-scrollbar {
    background-color: transparent;
@@ -917,7 +949,6 @@ input[type=number] {
    border: 1px solid rgb(251, 255, 0);
    color: rgb(177, 180, 0);
 }
-
 .div-button {
    display: flex;
    align-items: center;
@@ -928,4 +959,40 @@ input[type=number] {
    box-shadow: 0px 0px 5px #00000046;
    cursor: pointer;
    border: 1px solid transparent;
+}
+.noMargin {
+   margin: 0;
+}
+.allExchanges.noMargin {
+   background-color:#f9f9f9;
+   padding: 40px 0px;
+}
+.darkMode .allExchanges.noMargin {
+   background: linear-gradient(to right, #0a0a0a,#242424 ,  #383838);
+}
+
+
+@media only screen and (max-width: 1200px) {
+   .father .homePage-part3 {
+      padding: 0 20px;
+  }
+  .header {
+   padding: 0 10px;
+}
+
+}
+
+@media only screen and (max-width: 980px) {
+   .NoNe1 {
+      display: none;
+   } 
+    .father .homePage-part3 {
+      margin-top: -45px;
+  } 
+   .flex-align-center-justify {
+   flex-wrap: wrap;
+  } 
+   /* .homePage-part2-MARKETCAP.flex-center-column , .homePage-part2-EXCHANGES.flex-center-column ,  .homePage-part2-ASSETS.flex-center-column ,  .homePage-part2-EXCHANGEVOL.flex-center-column {
+   width: 50%;
+  }   */
 }

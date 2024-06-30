@@ -137,7 +137,7 @@ export default function RenderCoins(props) {
         onClick={() => {
           setClick(!click);
         }}>
-        <td className='center align'>
+        <td colSpan={1} className='center align'>
           <h5>{props.id}</h5>
         </td>
 
@@ -146,26 +146,28 @@ export default function RenderCoins(props) {
             src={`https://assets.coincap.io/assets/icons/${lowerCase}@2x.png`}
           />
           <div className='mix'>
-            <h5>{props.name}</h5>
-            <h5>{props.symbol}</h5>
+            <Link to={`/assets/${props.nameOfTheCoins}`}>
+              <h5>{props.name}</h5>
+              <h5>{props.symbol}</h5>
+            </Link>
           </div>
         </td>
-        <td className='right align'>
+        <td colSpan={1} className='right align'>
           <h5>{calculate(props.priceUsd)}</h5>
         </td>
-        <td className='right align'>
+        <td colSpan={1} className='right align'>
           <h5>{calculateBigNumber(props.marketCapUsd)}</h5>
         </td>
-        <td className='right align'>
+        <td colSpan={1} className='right align'>
           <h5>{calculate(props.vwap24Hr)}</h5>
         </td>
-        <td className='right align'>
+        <td colSpan={1} className='right align NoNe1'>
           <h5>{calculateBigNumber(props.supply)}</h5>
         </td>
-        <td className='right align'>
+        <td colSpan={1} className='right align NoNe1'>
           <h5>{calculateBigNumber(props.volumeUsd24Hr)}</h5>
         </td>
-        <td id={tr ? 'red' : 'green'} className='right align'>
+        <td colSpan={1} id={tr ? 'red' : 'green'} className='right align'>
           <h5>{calculateBigNumber(props.changePercent24Hr)}%</h5>
         </td>
       </tr>

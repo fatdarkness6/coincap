@@ -10,14 +10,13 @@ export default function Header() {
   const input = useRef();
   const background = useRef();
   const h5 = useRef();
-  let getElementFromLocalHost = localStorage.getItem('val');
   const [click, setClick] = useState(false);
   const [inputValue, setInputValue] = useState('');
   let [res, setRes] = useState([]);
   let [excangeRes, setExcangeRes] = useState([]);
   let [none, setNone] = useState(false);
   let [plus, setPlus] = useState(1);
-  let [checkBox, setCheckBox] = useState(getElementFromLocalHost);
+  let [checkBox, setCheckBox] = useState(false);
 
   useEffect(() => {
     if (inputValue !== '') {
@@ -63,7 +62,14 @@ export default function Header() {
   } else {
     document.body.classList.remove('darkMode');
   }
-
+  let getActivityFromLocalStorage = localStorage.getItem('val');
+  useEffect(() => {
+    if (getActivityFromLocalStorage == 'true') {
+      setCheckBox(false);
+    } else {
+      setCheckBox(true);
+    }
+  } , [checkBox])
   return (
     <>
       <div className='header'>
@@ -79,11 +85,13 @@ export default function Header() {
               <h4>Swap</h4>
             </div>
             <div className='logo'>
+              <Link to={`/`}>
               {document.body.classList.contains('darkMode') ? (
                 <img className='image2' src={image2} />
               ) : (
                 <img src={image} />
               )}
+              </Link>
             </div>
             <div className='currency'>
               <div className='currency-part1'>
@@ -182,11 +190,13 @@ export default function Header() {
                   </div>
                   <div className='portal-item2'>
                     <h4>Dark Theme</h4>
+                    {console.log(getActivityFromLocalStorage)
+                    }
                     <input
-                      checked={getElementFromLocalHost}
+                      checked={checkBox}
                       onClick={() => {
-                        setCheckBox(!checkBox);
                         localStorage.setItem('val', checkBox);
+                        setCheckBox(!checkBox);
                       }}
                       type='checkbox'
                     />

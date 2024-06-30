@@ -15,6 +15,7 @@ import torus from '../../../public/torus.png';
 import BinanceSmart from '../../../public/Binance-Smart.png';
 import aaa from "../../../public/aaa.png"
 import bbb from "../../../public/bbb.png"
+import RenderExchange from '../exchange/renderExchange';
 
 import {
   Chart as ChartJs,
@@ -26,6 +27,7 @@ import {
   Legend,
 } from 'chart.js';
 import { createPortal } from 'react-dom';
+import { exchangeApi } from '../../../api/exchangeApi';
 ChartJs.register(
   LineElement,
   CategoryScale,
@@ -49,9 +51,12 @@ export default function SingleCoin() {
   let [selectCoin, setSelectCoin] = useState('unselect');
   let [selectWallet, setSelectWallet] = useState('Binance');
   let [openPortal, setOpenPortal] = useState(false);
+  let [exchangeLenght, setExchangeLenght] = useState([]);
   useEffect(() => {
     setSearch(`active=${date}&selectCoin=${selectCoin}&wallet=${selectWallet}`);
   }, [upd, selectWallet]);
+
+  let background = useRef(null)
 
   useEffect(() => {
     coinsApi(coinName)
@@ -76,6 +81,13 @@ export default function SingleCoin() {
       .then((e) => {
         setResponse2(e.data);
       });
+      exchangeApi().then((e) => {
+        return e.json()
+      }).then((e) => {
+        setExchangeLenght(e.data)
+      })
+
+
     if (res?.changePercent24Hr < 0) {
       setTrue(true);
     } else {
@@ -88,6 +100,14 @@ export default function SingleCoin() {
       setPlus(plusPlus++);
     }, 40000);
   }, []);
+
+  useEffect(() => {
+    document.addEventListener('click', (e) => {      
+        if (e.target == background.current) {
+          setOpenPortal(false);
+        }
+    });
+  } , [])
 
   function calculatePrice(x) {
     if (x < 100000 && x >= 10000) {
@@ -390,7 +410,6 @@ export default function SingleCoin() {
                   </div>
                 </div>
               </div>
-
               <button
                 onClick={() => {
                   setOpenPortal(true);
@@ -402,9 +421,35 @@ export default function SingleCoin() {
           </div>
         </div>
       </div>
+      <div className='allExchanges noMargin'>
+        <div className='exchangePage-info-wrapper'>
+          <div className='exchangePage-info'>
+            <div className='container'>
+              <div className='header-container flex-align-center-justify'>
+                <div className='header-container-title flex-align-center'>
+                  <h5>Rank</h5>
+                  <h5>Name</h5>
+                </div>
+                <div className='header-container-info flex-align-center right'>
+                  <h5>Trading Pairs</h5>
+                  <h5>Top Pair</h5>
+                  <h5>Volume(24Hr)</h5>
+                  <h5>Total(%)</h5>
+                  <h5>Status</h5>
+                </div>
+              </div>
+              <div className='body-container'>
+                {exchangeLenght.map((e) => {
+                  return <RenderExchange exchangeId = {e.exchangeId} rank = {e.rank} name = {e.name} tradingPairs = {e.tradingPairs} topPair = {e.topPair} volumeUsd = {e.volumeUsd} percentTotalVolume = {e.percentTotalVolume} socket = {e.socket} />;
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
       {openPortal
         ? createPortal(
-            <div className='black-background'>
+            <div ref={background} className='black-background'>
               <div className='wallet-wrapper'>
                 <div className='wallet-container'>
                   <div className='wallet-title'>
