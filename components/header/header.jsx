@@ -76,13 +76,16 @@ export default function Header() {
         <div className='header-wrapper'>
           <div className='items'>
             <div className='coins'>
-              <Link to={`/`}>
+              <Link className='NoNe2' to={`/`}>
                 <h4>Coins</h4>
               </Link>
-              <Link to={`/exchanges`}>
+              <i class="fa-solid fa-bars"></i>
+              <Link className='NoNe2' to={`/exchanges`}>
                 <h4>Exchanges</h4>
               </Link>
+              <Link className='NoNe2' to={"https://app.shapeshift.com/?_ga=2.216213151.886595383.1719752448-46182446.1717690257#/trade"}>
               <h4>Swap</h4>
+              </Link>
             </div>
             <div className='logo'>
               <Link to={`/`}>
@@ -160,11 +163,12 @@ export default function Header() {
                 )}
               </div>
               <div
+              
                 onClick={() => {
                   setClick(true);
                 }}
-                className='currency-part2'>
-                <i class='fa-solid fa-gear'></i>
+                className='currency-part2 NoNe2'>
+                <i  class='fa-solid fa-gear'></i>
               </div>
             </div>
           </div>
@@ -190,8 +194,8 @@ export default function Header() {
                   </div>
                   <div className='portal-item2'>
                     <h4>Dark Theme</h4>
-                    {console.log(getActivityFromLocalStorage)
-                    }
+                  
+                    
                     <input
                       checked={checkBox}
                       onClick={() => {

@@ -71,6 +71,7 @@ export default function RenderCoins(props) {
 
   let options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: 'top',
@@ -137,7 +138,7 @@ export default function RenderCoins(props) {
         onClick={() => {
           setClick(!click);
         }}>
-        <td colSpan={1} className='center align'>
+        <td colSpan={1} className='center align NoNe2'>
           <h5>{props.id}</h5>
         </td>
 
@@ -155,10 +156,10 @@ export default function RenderCoins(props) {
         <td colSpan={1} className='right align'>
           <h5>{calculate(props.priceUsd)}</h5>
         </td>
-        <td colSpan={1} className='right align'>
+        <td colSpan={1} className='right align NoNe2'>
           <h5>{calculateBigNumber(props.marketCapUsd)}</h5>
         </td>
-        <td colSpan={1} className='right align'>
+        <td colSpan={1} className='right align NoNe2'>
           <h5>{calculate(props.vwap24Hr)}</h5>
         </td>
         <td colSpan={1} className='right align NoNe1'>
@@ -216,7 +217,10 @@ export default function RenderCoins(props) {
             </div>
           </div>
           <div className='chart-part2'>
-            <Line data={data} options={options}></Line>
+            <div className='chart-part2-slice1'>
+              <Line data={data} options={options}></Line>
+            </div>
+
             <Link to={`/assets/${props.nameOfTheCoins}`}>
               <div className='chart-part2-mix'>
                 <button className='seeMoreButton'>More Details</button>

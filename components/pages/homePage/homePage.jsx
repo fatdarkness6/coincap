@@ -14,8 +14,7 @@ export default function HomePage() {
   let [fullRes, setFullRes] = useState([]);
   let [exchange, setExchange] = useState([]);
   //.........................................................................
- 
- 
+
   useEffect(() => {
     homePageApi(plus)
       .then((e) => {
@@ -75,22 +74,22 @@ export default function HomePage() {
         <div className='homePage-part1'>
           <Header />
         </div>
-        <Body exchange = {exchange} fullRes = {fullRes} />
+        <Body exchange={exchange} fullRes={fullRes} />
         <div className='homePage-part3'>
           <div className='header-wrapper'>
             <table className='homePage-container'>
               <thead>
                 <tr className='part1'>
-                  <th>
+                  <th className='NoNe2'>
                     <h6>Rank</h6>
                   </th>
                   <th className='left align'>
                     <h6>Name</h6>
                   </th>
-                  <th className='right align'>
+                  <th className='right align '>
                     <h6>Price</h6>
                   </th>
-                  <th className='right align'>
+                  <th className='right align NoNe2'>
                     <h6>Market Cap</h6>
                   </th>
                   <th className='right align NoNe1'>
@@ -99,7 +98,7 @@ export default function HomePage() {
                   <th className='right align NoNe1'>
                     <h6>Supply</h6>
                   </th>
-                  <th className='right align'>
+                  <th className='right align NoNe2'>
                     <h6>Volume(24Hr)</h6>
                   </th>
                   <th className='right align'>
@@ -109,8 +108,6 @@ export default function HomePage() {
               </thead>
               <tbody>
                 {res.map((e) => {
-                  console.log(e);
-                  
                   return (
                     <RenderCoins
                       name={e.name}
