@@ -10,6 +10,8 @@ export default function Header() {
   const input = useRef();
   const background = useRef();
   const h5 = useRef();
+  let back = useRef(null);
+  const wrapper = useRef(null);
   const [click, setClick] = useState(false);
   const [inputValue, setInputValue] = useState('');
   let [res, setRes] = useState([]);
@@ -17,6 +19,7 @@ export default function Header() {
   let [none, setNone] = useState(false);
   let [plus, setPlus] = useState(1);
   let [checkBox, setCheckBox] = useState(false);
+  let [active2, setActive2] = useState(false);
 
   useEffect(() => {
     if (inputValue !== '') {
@@ -52,7 +55,7 @@ export default function Header() {
     }, 300);
 
     document.addEventListener('click', (e) => {
-      if (e.target == background.current) {
+      if (e.target == background.current || e.target == wrapper.current) {
         setClick(false);
       }
     });
@@ -69,7 +72,16 @@ export default function Header() {
     } else {
       setCheckBox(true);
     }
-  } , [checkBox])
+  }, [checkBox]);
+
+  useEffect(() => {
+    document.addEventListener('click', (e) => {
+      if (e.target == back.current) {
+        setActive2(false);
+      }
+    });
+  }, []);
+
   return (
     <>
       <div className='header'>
@@ -79,21 +91,29 @@ export default function Header() {
               <Link className='NoNe2' to={`/`}>
                 <h4>Coins</h4>
               </Link>
-              <i class="fa-solid fa-bars"></i>
+              <i
+                onClick={() => {
+                  setActive2(true);
+                }}
+                class='fa-solid fa-bars'></i>
               <Link className='NoNe2' to={`/exchanges`}>
                 <h4>Exchanges</h4>
               </Link>
-              <Link className='NoNe2' to={"https://app.shapeshift.com/?_ga=2.216213151.886595383.1719752448-46182446.1717690257#/trade"}>
-              <h4>Swap</h4>
+              <Link
+                className='NoNe2'
+                to={
+                  'https://app.shapeshift.com/?_ga=2.216213151.886595383.1719752448-46182446.1717690257#/trade'
+                }>
+                <h4>Swap</h4>
               </Link>
             </div>
             <div className='logo'>
               <Link to={`/`}>
-              {document.body.classList.contains('darkMode') ? (
-                <img className='image2' src={image2} />
-              ) : (
-                <img src={image} />
-              )}
+                {document.body.classList.contains('darkMode') ? (
+                  <img className='image2' src={image2} />
+                ) : (
+                  <img src={image} />
+                )}
               </Link>
             </div>
             <div className='currency'>
@@ -126,9 +146,7 @@ export default function Header() {
                                 }, 100);
                               }}
                               to={`/assets/${e.id}`}>
-                              <div
-                                
-                                className='flex-align-center'>
+                              <div className='flex-align-center'>
                                 <h5>{e.name}</h5>
                                 <h5>{`(${e.symbol})`}</h5>
                               </div>
@@ -151,9 +169,7 @@ export default function Header() {
                                   }, 100);
                                 }}
                                 to={`/exchanges/${e.exchangeId}`}>
-                                <h5 ref={h5}>
-                                  {e.name}
-                                </h5>
+                                <h5 ref={h5}>{e.name}</h5>
                               </Link>
                             </div>
                           );
@@ -163,12 +179,11 @@ export default function Header() {
                 )}
               </div>
               <div
-              
                 onClick={() => {
                   setClick(true);
                 }}
                 className='currency-part2 NoNe2'>
-                <i  class='fa-solid fa-gear'></i>
+                <i class='fa-solid fa-gear'></i>
               </div>
             </div>
           </div>
@@ -177,7 +192,7 @@ export default function Header() {
       {click
         ? createPortal(
             <div ref={background} className='black-background'>
-              <div className='portal-wrapper'>
+              <div ref={wrapper} className='portal-wrapper'>
                 <div className='portal-items'>
                   <div className='portal-item1'>
                     <div className='portal-item1-part1'>
@@ -194,8 +209,7 @@ export default function Header() {
                   </div>
                   <div className='portal-item2'>
                     <h4>Dark Theme</h4>
-                  
-                    
+
                     <input
                       checked={checkBox}
                       onClick={() => {
@@ -211,6 +225,48 @@ export default function Header() {
             document.body
           )
         : null}
+      <div ref={back} className={active2 ? 'back' : null}></div>
+      <div
+        id={active2 ? 'transform' : 'notTransform'}
+        className='hamberger-menu '>
+        <div className='hamberger-menu-slice1 flex-column-center'>
+          <Link className='flex-column-center' to={'/'}>
+            <i class='fa-brands fa-bitcoin'></i>
+            <h4>Coins</h4>
+          </Link>
+        </div>
+        <div className='hamberger-menu-slice2'>
+          <Link className='flex-column-center' to={'/exchanges'}>
+            <i class='fa-solid fa-exchange-alt'></i>
+            <h4>Exchanges</h4>
+          </Link>
+        </div>
+        <div className='hamberger-menu-slice3 flex-column-center'>
+          <Link
+            className='flex-column-center'
+            to={
+              'https://app.shapeshift.com/?_ga=2.225053587.886595383.1719752448-46182446.1717690257#/trade'
+            }>
+            <i class='fa-solid fa-shuffle'></i>
+            <h4>Swap</h4>
+          </Link>
+        </div>
+        <div className='hamberger-menu-slice4 flex-column-center '>
+          <Link className='flex-column-center' to={'https://docs.coincap.io'}>
+            <i class='fa-solid fa-a'></i>
+            <h4>Api</h4>
+          </Link>
+        </div>
+        <div
+          onClick={() => {
+            setClick(true);
+            setActive2(false);
+          }}
+          className='hamberger-menu-slice5 flex-column-center '>
+          <i class='fa-solid fa-gear'></i>
+          <h4>Setting</h4>
+        </div>
+      </div>
     </>
   );
 }

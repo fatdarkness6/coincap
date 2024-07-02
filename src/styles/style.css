@@ -84,6 +84,7 @@
 body {
     margin: 0;
     font-family: Vazirmatn;
+    overflow-x: hidden;
 }
 body.darkMode {
    background-color: #252525;
@@ -226,6 +227,13 @@ a {
    align-items: center;
    flex-direction: column;
 
+}
+.flex-column-center {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   grid-area: 5px;
+   flex-direction: column;
 }
 .flex-column-start {
    display: flex;
@@ -988,10 +996,50 @@ input[type=number] {
    color: #fff;
 }
 
+.consistAllElement {
+   display: none;
+}
+.hamberger-menu {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 200px;
+   height: 100vh;
+   background-color: #fff;
+   display: flex;
+   align-items: center;
+   justify-content: start;
+   flex-direction: column;
+   box-shadow: 0px 0px 10px #00000080;
+   padding: 20px;
+   overflow-y: auto;
+   transition: all 0.5s;
+}
+.darkMode .hamberger-menu {
+   background-color: #383838;
+   color: #fff;
+}
+.back {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #0000003a;
+}
+.hamberger-menu i {
+   font-size: 20px;
+}
 
-
-
-
+#notTransform {
+   left: -200px;
+}
+#transform {
+   left: 0;
+}
+.header-wrapper .items .logo img.image2 {
+   margin: 0;
+}
 
 @media only screen and (max-width: 1200px) {
    .father .homePage-part3 {
@@ -1042,10 +1090,9 @@ input[type=number] {
    border-radius: 1px
 }
 .consistAllElement {
-   padding: 15px;
-}
-.consistAllElement {
+   display: block;
    width: 100%;
+   padding: 15px;
 }
 .slice2-body-container {
    padding: 10px 30px;

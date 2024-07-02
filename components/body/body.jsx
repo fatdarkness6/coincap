@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Body(props) {
   let arry = [];
@@ -8,8 +9,8 @@ export default function Body(props) {
   let EXCHANGEVOLnumber = 0;
   let EXCHANGEVOLfinal = 0;
 
-
-  const[active , setActive] = useState(false)
+  const [active, setActive] = useState(false);
+  const [active2 , setActive2] = useState(false) 
   return (
     <>
       <div className='homePage-part2'>
@@ -55,13 +56,18 @@ export default function Body(props) {
           </div>
           <div className='flex-center-column slice2-body'>
             <div className='consistAllElement'>
-              <div onClick={() => {
-                setActive(!active)
-              }} className="slice1-body-container flex-align-center-justify">
+              <div
+                onClick={() => {
+                  setActive(!active);
+                }}
+                className='slice1-body-container flex-align-center-justify'>
                 <h4>Market Snapshot</h4>
-                <i class={!active ? "fa-solid fa-sort-down" : "fa-solid fa-sort-up"}></i>
+                <i
+                  class={
+                    !active ? 'fa-solid fa-sort-down' : 'fa-solid fa-sort-up'
+                  }></i>
               </div>
-              <div className={active ? "slice2-body-container" : "none"}>
+              <div className={active ? 'slice2-body-container' : 'none'}>
                 <div className='homePage-part2-MARKETCAP  border flex-align-center-justify'>
                   {props.fullRes.map((e) => {
                     let a = e.marketCapUsd;
@@ -104,6 +110,7 @@ export default function Body(props) {
           </div>
         </div>
       </div>
+      
     </>
   );
 }
