@@ -1064,6 +1064,9 @@ input[type=number] {
   .flex-align-center-justify.padding-top {
    padding: 10px 20px;
   }
+  .header-wrapper .items .currency button {
+   width: 25px;
+  }
 }
 
 @media only screen and (max-width: 680px) {
