@@ -10,6 +10,7 @@ export default function Header() {
   const input = useRef();
   const background = useRef();
   const h5 = useRef();
+  const button = useRef()
   let back = useRef(null);
   const wrapper = useRef(null);
   const [click, setClick] = useState(false);
@@ -20,6 +21,7 @@ export default function Header() {
   let [plus, setPlus] = useState(1);
   let [checkBox, setCheckBox] = useState(false);
   let [active2, setActive2] = useState(false);
+  let [openButton, setOpenButton] = useState(false);
 
   useEffect(() => {
     if (inputValue !== '') {
@@ -46,13 +48,16 @@ export default function Header() {
   }, [inputValue]);
 
   useEffect(() => {
-    setTimeout(() => {
-      if (document.activeElement !== input.current) {
+    console.log(document.activeElement == button.current);
+    
+      if (document.activeElement !== input.current && document.activeElement !== button.current) {
+      setTimeout(() => {
         setNone(true);
-      } else {
-        setNone(false);
-      }
-    }, 300);
+        setOpenButton(false);
+      }, 300);
+    } else {
+      setNone(false);
+    }
 
     document.addEventListener('click', (e) => {
       if (e.target == background.current || e.target == wrapper.current) {
@@ -118,7 +123,11 @@ export default function Header() {
             </div>
             <div className='currency'>
               <div className='currency-part1'>
-                <button>
+                <button ref={button}
+                  className={openButton ? 'openBtn' : 'closeBtn'}
+                  onClick={() => {
+                    setOpenButton(true);
+                  }}>
                   <i class='fa-solid fa-magnifying-glass'></i>
                   <input
                     onChange={(e) => {

@@ -193,7 +193,7 @@ a {
    position: relative;
 }
 
-.header-wrapper .items .currency button:focus-within  {
+.header-wrapper .items .currency button.openBtn  {
     width: 200px;
     border: 1px solid #000;
 }
