@@ -154,6 +154,9 @@ a {
     margin-right: 140px;
     padding: 0;
 }
+.darkMode .header-wrapper .items , .darkMode .header-wrapper .items i , .header-wrapper .items .currency button input {
+   color: #fff;
+}
 .header-wrapper .items .logo img.image2 {
    width: 110px;
    height: 55px;
@@ -197,6 +200,9 @@ a {
 .header-wrapper .items .currency button.openBtn  {
     width: 200px;
     border: 1px solid #000;
+}
+.darkMode .header-wrapper .items .currency button.openBtn {
+   border: 1px solid #fff;
 }
 .header-wrapper .items .currency button i {
      font-size: 15px;
@@ -1130,6 +1136,9 @@ input[type=number] {
 }
 .coinExchange-part1-slice1 {
   padding: 5px;
+}
+.darkMode .header-wrapper .items {
+   padding: 5px 15px;
 }
 }
 @media only screen and (max-width: 810px) {
