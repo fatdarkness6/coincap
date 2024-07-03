@@ -10,7 +10,7 @@ export default function Header() {
   const input = useRef();
   const background = useRef();
   const h5 = useRef();
-  const button = useRef()
+  const button = useRef();
   let back = useRef(null);
   const wrapper = useRef(null);
   const [click, setClick] = useState(false);
@@ -49,8 +49,11 @@ export default function Header() {
 
   useEffect(() => {
     console.log(document.activeElement == button.current);
-    
-      if (document.activeElement !== input.current && document.activeElement !== button.current) {
+
+    if (
+      document.activeElement !== input.current &&
+      document.activeElement !== button.current
+    ) {
       setTimeout(() => {
         setNone(true);
         setOpenButton(false);
@@ -89,64 +92,87 @@ export default function Header() {
 
   return (
     <>
-      <div className='header'>
-        <div className='header-wrapper'>
-          <div className='items'>
-            <div className='coins'>
-              <Link className='NoNe2' to={`/`}>
-                <h4>Coins</h4>
-              </Link>
-              <i
+      <div className='header-wrapper'>
+        <div className='items'>
+          <div className='coins'>
+            <Link className='NoNe2' to={`/`}>
+              <h4>Coins</h4>
+            </Link>
+            <i
+              onClick={() => {
+                setActive2(true);
+              }}
+              class='fa-solid fa-bars'></i>
+            <Link className='NoNe2' to={`/exchanges`}>
+              <h4>Exchanges</h4>
+            </Link>
+            <Link
+              className='NoNe2'
+              to={
+                'https://app.shapeshift.com/?_ga=2.216213151.886595383.1719752448-46182446.1717690257#/trade'
+              }>
+              <h4>Swap</h4>
+            </Link>
+          </div>
+          <div className='logo'>
+            <Link to={`/`}>
+              {document.body.classList.contains('darkMode') ? (
+                <img className='image2' src={image2} />
+              ) : (
+                <img src={image} />
+              )}
+            </Link>
+          </div>
+          <div className='currency'>
+            <div className='currency-part1'>
+              <button
+                ref={button}
+                className={openButton ? 'openBtn' : 'closeBtn'}
                 onClick={() => {
-                  setActive2(true);
-                }}
-                class='fa-solid fa-bars'></i>
-              <Link className='NoNe2' to={`/exchanges`}>
-                <h4>Exchanges</h4>
-              </Link>
-              <Link
-                className='NoNe2'
-                to={
-                  'https://app.shapeshift.com/?_ga=2.216213151.886595383.1719752448-46182446.1717690257#/trade'
-                }>
-                <h4>Swap</h4>
-              </Link>
-            </div>
-            <div className='logo'>
-              <Link to={`/`}>
-                {document.body.classList.contains('darkMode') ? (
-                  <img className='image2' src={image2} />
-                ) : (
-                  <img src={image} />
-                )}
-              </Link>
-            </div>
-            <div className='currency'>
-              <div className='currency-part1'>
-                <button ref={button}
-                  className={openButton ? 'openBtn' : 'closeBtn'}
-                  onClick={() => {
-                    setOpenButton(true);
-                  }}>
-                  <i class='fa-solid fa-magnifying-glass'></i>
-                  <input
-                    onChange={(e) => {
-                      let a = e.target.value;
-                      setInputValue(a);
-                    }}
-                    ref={input}
-                    id='idOfInput'
-                  />
-                </button>
-                {inputValue !== '' && (
-                  <div
-                    id={!none ? 'block' : 'none'}
-                    className='currency-part2-absolute'>
-                    <div className='Assets'>
-                      <h3>Assets</h3>
-                      {res.length !== 0 &&
-                        res.map((e) => {
-                          return (
+                  setOpenButton(true);
+                }}>
+                <i class='fa-solid fa-magnifying-glass'></i>
+                <input
+                  onChange={(e) => {
+                    let a = e.target.value;
+                    setInputValue(a);
+                  }}
+                  ref={input}
+                  id='idOfInput'
+                />
+              </button>
+              {inputValue !== '' && (
+                <div
+                  id={!none ? 'block' : 'none'}
+                  className='currency-part2-absolute'>
+                  <div className='Assets'>
+                    <h3>Assets</h3>
+                    {res.length !== 0 &&
+                      res.map((e) => {
+                        return (
+                          <Link
+                            onClick={() => {
+                              setNone(false);
+                              setTimeout(() => {
+                                location.reload();
+                              }, 100);
+                            }}
+                            to={`/assets/${e.id}`}>
+                            <div className='flex-align-center'>
+                              <h5>{e.name}</h5>
+                              <h5>{`(${e.symbol})`}</h5>
+                            </div>
+                          </Link>
+                        );
+                      })}
+                  </div>
+                  <div className='Exchanges'>
+                    <h3>Exchanges</h3>
+
+                    {excangeRes.length !== 0 &&
+                      excangeRes.map((e) => {
+                        return (
+                          <div>
                             <Link
                               onClick={() => {
                                 setNone(false);
@@ -154,50 +180,27 @@ export default function Header() {
                                   location.reload();
                                 }, 100);
                               }}
-                              to={`/assets/${e.id}`}>
-                              <div className='flex-align-center'>
-                                <h5>{e.name}</h5>
-                                <h5>{`(${e.symbol})`}</h5>
-                              </div>
+                              to={`/exchanges/${e.exchangeId}`}>
+                              <h5 ref={h5}>{e.name}</h5>
                             </Link>
-                          );
-                        })}
-                    </div>
-                    <div className='Exchanges'>
-                      <h3>Exchanges</h3>
-
-                      {excangeRes.length !== 0 &&
-                        excangeRes.map((e) => {
-                          return (
-                            <div>
-                              <Link
-                                onClick={() => {
-                                  setNone(false);
-                                  setTimeout(() => {
-                                    location.reload();
-                                  }, 100);
-                                }}
-                                to={`/exchanges/${e.exchangeId}`}>
-                                <h5 ref={h5}>{e.name}</h5>
-                              </Link>
-                            </div>
-                          );
-                        })}
-                    </div>
+                          </div>
+                        );
+                      })}
                   </div>
-                )}
-              </div>
-              <div
-                onClick={() => {
-                  setClick(true);
-                }}
-                className='currency-part2 NoNe2'>
-                <i class='fa-solid fa-gear'></i>
-              </div>
+                </div>
+              )}
+            </div>
+            <div
+              onClick={() => {
+                setClick(true);
+              }}
+              className='currency-part2 NoNe2'>
+              <i class='fa-solid fa-gear'></i>
             </div>
           </div>
         </div>
       </div>
+
       {click
         ? createPortal(
             <div ref={background} className='black-background'>

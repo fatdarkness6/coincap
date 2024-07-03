@@ -32,20 +32,20 @@ export default function RenderExchange(e) {
           <h5>{e.name}</h5>
         </div>
         <div className='header-container-info flex-align-center right'>
-          <h5>{e.tradingPairs}</h5>
+          <h5 className='NoNe2'>{e.tradingPairs}</h5>
           <h5>
             {res?.baseSymbol}/{res?.quoteSymbol}
           </h5>
           {}
-          <h5>{!e.volumeUsd ? '-' : calculateBigNumber(e?.volumeUsd)}</h5>
+          <h5 className='NoNe1'>{!e.volumeUsd ? '-' : calculateBigNumber(e?.volumeUsd)}</h5>
           <h5>
             {!e.percentTotalVolume
               ? '-'
               : calculateBigNumber(e?.percentTotalVolume)}
             %
           </h5>
-          <div className='circle'>
-            <div className={bolean == true ? 'green' : 'red'}></div>
+          <div className='circle NoNe1'>
+            <div className={bolean == true ? 'green ' : 'red '}></div>
           </div>
         </div>
       </div>

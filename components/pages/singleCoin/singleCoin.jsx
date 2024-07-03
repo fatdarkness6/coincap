@@ -13,8 +13,8 @@ import foxImg from '../../../public/MetaMask_Fox.svg.png';
 import wallet1 from '../../../public/wallet1.png';
 import torus from '../../../public/torus.png';
 import BinanceSmart from '../../../public/Binance-Smart.png';
-import aaa from "../../../public/aaa.png"
-import bbb from "../../../public/bbb.png"
+import aaa from '../../../public/aaa.png';
+import bbb from '../../../public/bbb.png';
 import RenderExchange from '../exchange/renderExchange';
 
 import {
@@ -56,7 +56,7 @@ export default function SingleCoin() {
     setSearch(`active=${date}&selectCoin=${selectCoin}&wallet=${selectWallet}`);
   }, [upd, selectWallet]);
 
-  let background = useRef(null)
+  let background = useRef(null);
 
   useEffect(() => {
     coinsApi(coinName)
@@ -81,12 +81,13 @@ export default function SingleCoin() {
       .then((e) => {
         setResponse2(e.data);
       });
-      exchangeApi().then((e) => {
-        return e.json()
-      }).then((e) => {
-        setExchangeLenght(e.data)
+    exchangeApi()
+      .then((e) => {
+        return e.json();
       })
-
+      .then((e) => {
+        setExchangeLenght(e.data);
+      });
 
     if (res?.changePercent24Hr < 0) {
       setTrue(true);
@@ -102,12 +103,12 @@ export default function SingleCoin() {
   }, []);
 
   useEffect(() => {
-    document.addEventListener('click', (e) => {      
-        if (e.target == background.current) {
-          setOpenPortal(false);
-        }
+    document.addEventListener('click', (e) => {
+      if (e.target == background.current) {
+        setOpenPortal(false);
+      }
     });
-  } , [])
+  }, []);
 
   function calculatePrice(x) {
     if (x < 100000 && x >= 10000) {
@@ -217,6 +218,7 @@ export default function SingleCoin() {
 
   let options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: 'top',
@@ -251,7 +253,7 @@ export default function SingleCoin() {
                   {res?.name}
                   {`(${res?.symbol})`}
                 </h2>
-                <div className='flex-align-center-justify'>
+                <div className='div flex-align-center-justify'>
                   <h2>$ {calculatePrice(res?.priceUsd)}</h2>
                   <div className='increase-decrease flex-align-center'>
                     <h5 id={!truee ? 'green' : 'red'}>
@@ -330,7 +332,9 @@ export default function SingleCoin() {
                 </div>
               </div>
               <div className='info-part2'>
-                <Line data={data} options={options}></Line>
+                <div className='chart-part2-slice1'>
+                  <Line data={data} options={options}></Line>
+                </div>
                 <div className='days'>
                   <h5
                     className={
@@ -391,10 +395,6 @@ export default function SingleCoin() {
                 <h4>You sell</h4>
                 <div className='coinExchange-part1-slice1'>
                   <input type='number' placeholder='0' />
-                  <div className='selectedCoin'>
-                    <h3>{search.get('selectCoin')}</h3>
-                    <i class='fa-solid fa-chevron-down'></i>
-                  </div>
                 </div>
               </div>
               <div className='reverse-exchange'>
@@ -404,10 +404,6 @@ export default function SingleCoin() {
                 <h4>You Get</h4>
                 <div className='coinExchange-part1-slice1'>
                   <input type='number' placeholder='0' />
-                  <div className='selectedCoin'>
-                    <h3>{search.get('selectCoin')}</h3>
-                    <i class='fa-solid fa-chevron-down'></i>
-                  </div>
                 </div>
               </div>
               <button
@@ -431,22 +427,33 @@ export default function SingleCoin() {
                   <h5>Name</h5>
                 </div>
                 <div className='header-container-info flex-align-center right'>
-                  <h5>Trading Pairs</h5>
+                  <h5 className='NoNe2'>Trading Pairs</h5>
                   <h5>Top Pair</h5>
-                  <h5>Volume(24Hr)</h5>
+                  <h5 className='NoNe1'>Volume(24Hr)</h5>
                   <h5>Total(%)</h5>
-                  <h5>Status</h5>
+                  <h5 className='NoNe1'>Status</h5>
                 </div>
               </div>
               <div className='body-container'>
                 {exchangeLenght.map((e) => {
-                  return <RenderExchange exchangeId = {e.exchangeId} rank = {e.rank} name = {e.name} tradingPairs = {e.tradingPairs} topPair = {e.topPair} volumeUsd = {e.volumeUsd} percentTotalVolume = {e.percentTotalVolume} socket = {e.socket} />;
+                  return (
+                    <RenderExchange
+                      exchangeId={e.exchangeId}
+                      rank={e.rank}
+                      name={e.name}
+                      tradingPairs={e.tradingPairs}
+                      topPair={e.topPair}
+                      volumeUsd={e.volumeUsd}
+                      percentTotalVolume={e.percentTotalVolume}
+                      socket={e.socket}
+                    />
+                  );
                 })}
               </div>
             </div>
           </div>
         </div>
-        </div>
+      </div>
       {openPortal
         ? createPortal(
             <div ref={background} className='black-background'>
@@ -499,12 +506,12 @@ export default function SingleCoin() {
                         className='select-wallet-Binance'>
                         <h3>Connect a wallet</h3>
                         <div className='select-wallet-BinancePart'>
-                            <Link to={'https://metamask.io'}>
-                          <div className='select-wallet-BinancePart-slice1 div-button'>
+                          <Link to={'https://metamask.io'}>
+                            <div className='select-wallet-BinancePart-slice1 div-button'>
                               <h4>Install Metamask</h4>
                               <img src={foxImg} />
-                          </div>
-                            </Link>
+                            </div>
+                          </Link>
                           <div className='select-wallet-BinancePart-slice2 div-button'>
                             <h4>WalletConnect</h4>
                             <img src={wallet1} />
@@ -524,25 +531,25 @@ export default function SingleCoin() {
                           search.get('wallet') == 'Ethereum' ? 'block' : 'none'
                         }
                         className='select-wallet-Ethereum'>
-                          <h3>Connect a wallet</h3>
+                        <h3>Connect a wallet</h3>
                         <div className='select-wallet-BinancePart'>
-                            <Link to={'https://metamask.io'}>
-                          <div className='select-wallet-BinancePart-slice1 div-button'>
+                          <Link to={'https://metamask.io'}>
+                            <div className='select-wallet-BinancePart-slice1 div-button'>
                               <h4>Portis By ShapeShift</h4>
                               <img src={aaa} />
-                          </div>
-                            </Link>
+                            </div>
+                          </Link>
                           <div className='select-wallet-BinancePart-slice2 div-button'>
-                          <h4>Install Metamask</h4>
-                          <img src={foxImg} />
+                            <h4>Install Metamask</h4>
+                            <img src={foxImg} />
                           </div>
                           <div className='select-wallet-BinancePart-slice3 div-button'>
                             <h4>Torus</h4>
                             <img src={torus} />
                           </div>
                           <div className='select-wallet-BinancePart-slice4 div-button'>
-                          <h4>WalletConnect</h4>
-                          <img src={wallet1} />
+                            <h4>WalletConnect</h4>
+                            <img src={wallet1} />
                           </div>
                           <div className='select-wallet-BinancePart-slice4 div-button'>
                             <h4>Coinbase Wallet</h4>
@@ -553,7 +560,7 @@ export default function SingleCoin() {
                             <img src={BinanceSmart} />
                           </div>
                         </div>
-                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

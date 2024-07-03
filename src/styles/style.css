@@ -126,6 +126,7 @@ a {
     background-color: #fff;
     position: sticky;
     top: 0;
+    box-shadow: 0px 0px 5px #0000003b;
 }
 .darkMode .header {
    background-color: #000000;
@@ -795,7 +796,7 @@ div.red {
    border: none;
    background-color: transparent;
    font-size: 24px;
-   width: 50%;
+   width: 100%;
 }
 .coinExchange-part1-slice1 input:focus {
    outline: none;
@@ -1040,7 +1041,11 @@ input[type=number] {
 .header-wrapper .items .logo img.image2 {
    margin: 0;
 }
-
+@media only screen and (max-width: 1320px) {
+   .coinExchange-part1-slice1, .candlesAndCoins-info-container {
+       padding: 0px 20px;
+   }
+}
 @media only screen and (max-width: 1200px) {
    .father .homePage-part3 {
       padding: 0 20px;
@@ -1052,11 +1057,21 @@ input[type=number] {
    width: 99%;
    height: 400px;
 }
+.allExchanges.noMargin {
+   padding: 40px 20px;
+}
+.homePage-part2-1-wrapper {
+   padding-left: 20px;
+   padding-right: 20px;
+}
+.div.flex-align-center-justify {
+   align-items: end;
+}
 }
 
 @media only screen and (max-width: 980px) {
    .NoNe1 {
-      display: none;
+      display: none !important;
    } 
    .flex-align-center-justify {
    flex-wrap: wrap;
@@ -1067,18 +1082,89 @@ input[type=number] {
   .header-wrapper .items .currency button {
    width: 25px;
   }
+  .coinExchange-part1-slice1 input {
+   font-size: 20px;
 }
-
-@media only screen and (max-width: 680px) {
+.coinExchange-part1, .coinExchange-part2 {
+   padding: 10px;
+}
+.candlesAndCoins-info-slice2 h3 {
+   margin: 0;
+}
+.header-container-info {
+   justify-content: end;
+   gap: 20px;
+}
+}
+@media only screen and (max-width: 910px) {
+   .info-slice1 .info-img {
+      width: 55px;
+      height: 55px;
+  }
+  .info-slice1 {
+   gap: 5px;
+}
+.info-mix {
+   gap: 5px;
+}
+.coinExchange-part1-slice1, .candlesAndCoins-info-container {
+   padding: 20px 20px;
+}
+.info-slice2 h3 {
+   margin: 0;
+}
+.info-high-low, .info-avrage-change {
+   gap: 5px;
+}
+.flex-align-gap-row {
+   gap: 10px;
+}
+.info-part1 {
+   padding-bottom: 20px ;
+}
+.info-mix-slice1 h5 {
+   font-size: 17px;
+}
+.info-mix-slice2 {
+   font-size: 14px;
+}
+.coinExchange-part1-slice1 {
+  padding: 5px;
+}
+}
+@media only screen and (max-width: 810px) {
+   .candlesAndCoins-info-container {
+      flex-direction: column;
+   }
+   .candlesAndCoins-info-slice2 , .candlesAndCoins-info-slice1{
+      width: 100%;
+   }
+   .candlesAndCoins-info-slice1 {
+      border-bottom: 1px solid #0000004d;
+      margin-bottom: 20px;
+   }
    .NoNe2 {
-      display: none;
-     }
-     .header-wrapper .items .logo img {
-      margin: 0;
+      display: none !important;
      }
      .fa-solid.fa-bars {
       display: block;
      }
+     .header-wrapper .items .logo img {
+      margin: 0;
+     }
+     .nameOfExchanges {
+      font-size: 14px;
+     }
+     .homePage-part2-1-container {
+      gap: 10px;
+     }
+     .consistAllElement {
+      display: block;
+      width: 100%;
+      padding: 15px;
+   }
+}
+@media only screen and (max-width: 680px) {
      .info-part1 {
       flex-direction: column;
       gap: 10px;
@@ -1092,11 +1178,7 @@ input[type=number] {
 .homePage-part3 .header-wrapper .homePage-container {
    border-radius: 1px
 }
-.consistAllElement {
-   display: block;
-   width: 100%;
-   padding: 15px;
-}
+
 .slice2-body-container {
    padding: 10px 30px;
    display: flex;
@@ -1110,6 +1192,19 @@ input[type=number] {
 
 .flex-align-center-justify.padding-top {
    padding: 0;
+}
+.header-container-info.flex-align-center.right h5:nth-child(2) {
+   width: 90px;
+}
+.header-container-info {
+   gap: 30px;
+}
+.homePage-father {
+   padding-bottom: 20px;
+}
+.homePage-part2-2-container {
+   flex-wrap: wrap;
+   gap: 15px;
 }
 }
 @media only screen and (max-width: 500px) {
@@ -1129,11 +1224,23 @@ input[type=number] {
 .info-mix-slice2 {
    font-size: 14px;
 }
+.homePage-part2-2-container {
+   justify-content: end;
+}
+.Volume24Hr.flex-column-start , .marketCapUsd.flex-column-start , .supply.flex-column-start {
+   align-items: end;
+}
 }
 @media only screen and (max-width: 450px) {
    .info-slice2 {
       gap: 20px;
    }
+   .nameOfExchanges {
+      font-size: 12px;
+  }
+  .shape1 {
+   width: 70px;
+  }
 }
 @media only screen and (max-width: 400px)  {
    .flex-align-gap-row {
