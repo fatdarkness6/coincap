@@ -2,8 +2,8 @@ import { useState, useRef, useEffect } from 'react';
 import image from '../../public/a.png';
 import image2 from '../../public/white.png';
 import { createPortal } from 'react-dom';
-import { searchCoinsApi } from '../../api/searchCoinsApi';
-import { searchExchanges } from '../../api/searchExchanges';
+import { searchCoinsApi } from '../../composable/useSearchCoinsApi';
+import { searchExchanges } from '../../composable/useSearchExchanges';
 import { Link } from 'react-router-dom';
 
 export default function Header() {
@@ -179,8 +179,8 @@ export default function Header() {
                   <div className='Exchanges'>
                     <h3>Exchanges</h3>
 
-                    {excangeRes.length !== 0 &&
-                      excangeRes.map((e) => {
+                    {excangeRes?.length !== 0 &&
+                      excangeRes?.map((e) => {
                         return (
                           <div>
                             <Link

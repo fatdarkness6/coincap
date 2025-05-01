@@ -17,7 +17,7 @@ export default function Body(props) {
         <div className='homePage-part2-wrapper'>
           <div className='flex-align-center-justify padding-top'>
             <div className='homePage-part2-MARKETCAP NoNe2 flex-center-column'>
-              {props.fullRes.map((e) => {
+              {props.fullRes?.map((e) => {
                 let a = e.marketCapUsd;
                 arry.push(a);
               })}
@@ -32,7 +32,7 @@ export default function Body(props) {
               <h3>{final}T</h3>
             </div>
             <div className='homePage-part2-EXCHANGEVOL NoNe2 flex-center-column'>
-              {props.fullRes.map((e) => {
+              {props.fullRes?.map((e) => {
                 let a = e.volumeUsd24Hr;
                 EXCHANGEVOLarry.push(a);
               })}
@@ -47,11 +47,11 @@ export default function Body(props) {
             </div>
             <div className='homePage-part2-ASSETS NoNe2 flex-center-column'>
               <h3>ASSETS</h3>
-              <h3>{props.fullRes.length}</h3>
+              <h3>{props.fullRes?.length}</h3>
             </div>
             <div className='homePage-part2-EXCHANGES NoNe2 flex-center-column'>
               <h3>EXCHANGES</h3>
-              <h3>{props.exchange.length}</h3>
+              <h3>{props.exchange?.length}</h3>
             </div>
           </div>
           <div className='flex-center-column slice2-body'>
@@ -69,7 +69,7 @@ export default function Body(props) {
               </div>
               <div className={active ? 'slice2-body-container' : 'none'}>
                 <div className='homePage-part2-MARKETCAP  border flex-align-center-justify'>
-                  {props.fullRes.map((e) => {
+                  {props.fullRes?.map((e) => {
                     let a = e.marketCapUsd;
                     arry.push(a);
                   })}
@@ -84,7 +84,7 @@ export default function Body(props) {
                   <h3>{final}T</h3>
                 </div>
                 <div className='homePage-part2-EXCHANGEVOL border  flex-align-center-justify'>
-                  {props.fullRes.map((e) => {
+                  {props.fullRes?.map((e) => {
                     let a = e.volumeUsd24Hr;
                     EXCHANGEVOLarry.push(a);
                   })}
@@ -99,11 +99,11 @@ export default function Body(props) {
                 </div>
                 <div className='homePage-part2-ASSETS border flex-align-center-justify'>
                   <h3>ASSETS</h3>
-                  <h3>{props.fullRes.length}</h3>
+                  <h3>{props.fullRes?.length}</h3>
                 </div>
                 <div className='homePage-part2-EXCHANGES  flex-align-center-justify'>
                   <h3>EXCHANGES</h3>
-                  <h3>{props.exchange.length}</h3>
+                  <h3>{props.exchange?.length}</h3>
                 </div>
               </div>
             </div>
