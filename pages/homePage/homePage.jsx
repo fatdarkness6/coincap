@@ -107,7 +107,7 @@ export default function HomePage() {
                 </tr>
               </thead>
               <tbody>
-                {res.map((e) => {
+                {res?.map((e) => {
                   return (
                     <RenderCoins
                       name={e.name}
@@ -128,7 +128,7 @@ export default function HomePage() {
           </div>
         </div>
         <div className='homePage-part4'>
-          {res.length == plus ? (
+          {res?.length == plus ? (
             <button
               className='load-button'
               onClick={() => {

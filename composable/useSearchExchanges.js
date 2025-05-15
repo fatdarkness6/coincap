@@ -4,7 +4,7 @@ return await fetch(`https://rest.coincap.io/v3/exchanges?search=${name}` , {
       headers: {
         'Content-Type': 'application/json',
         "Accept-Encoding": "deflate" ,
-        "Authorization" : "Bearer 9c7d65ac-2855-43e0-bdf7-1722260c7ec6"
+        "Authorization" : "Bearer 1704aad12ff97270b4dd95f079f00e4116134a5a0679c25444eb20300f807c8f"
       },
 });
 }
